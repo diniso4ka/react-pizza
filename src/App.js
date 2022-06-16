@@ -22,6 +22,8 @@ function App() {
     name={item.name}
     price={item.price}
     key={item.id}
+    sizes={item.sizes}
+    types={item.types}
   />)
 
 
