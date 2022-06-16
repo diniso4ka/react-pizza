@@ -1,4 +1,6 @@
 import './App.scss';
+import React from 'react';
+import axios from 'axios';
 
 
 
@@ -12,19 +14,25 @@ import pizzas from './assets/pizzas.json'
 
 function App() {
 
+  const [items, setItems] = React.useState([])
 
 
 
-  const items = pizzas.map((item, index) => <PizzaBlock
-    id={item.id}
-    category={item.category}
-    imageUrl={item.imageUrl}
-    name={item.name}
-    price={item.price}
-    key={item.id}
-    sizes={item.sizes}
-    types={item.types}
-  />)
+
+
+  React.useEffect(() => {
+    fetch('https://62ab2c0fa62365888bd68a9b.mockapi.io/items')
+      .then((res) => {
+        return res.json();
+      }).then((arr) => {
+        setItems(arr)
+      })
+  }, [])
+
+
+
+
+
 
 
 
@@ -49,7 +57,9 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {items}
+            {items.map((item, index) => <PizzaBlock
+              {...item}
+            />)}
           </div>
         </div>
       </div>

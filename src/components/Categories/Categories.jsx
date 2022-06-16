@@ -6,9 +6,6 @@ import React from 'react'
 const Categories = () => {
 
   const [activeIndex, setActiveIndex] = React.useState(0)
-  const onCategoryClick = (index) => {
-    setActiveIndex(Number(index))
-  }
 
 
 
@@ -24,7 +21,7 @@ const Categories = () => {
 
   const categoriesElements = categories
     .map((element, index) =>
-      <li onClick={() => onCategoryClick(index)} className={activeIndex === index ? 'active' : ''} key={element}>
+      <li onClick={() => setActiveIndex(index)} className={activeIndex === index ? 'active' : ''} key={element}>
         {element}
       </ li>)
 
