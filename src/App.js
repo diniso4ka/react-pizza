@@ -7,22 +7,23 @@ import Categories from './components/Categories/Categories'
 import Sort from './components/Sort/Sort'
 import PizzaBlock from './components/Pizza-block/Pizza-block'
 
+
+import pizzas from './assets/pizzas.json'
+
 function App() {
 
-  const items = [{ title: 'Мексиканская', price: '649' },
-  { title: 'Карбонара', price: '649' },
-  { title: 'Четыре сыра', price: '549' },
-  { title: 'Пепперони фреш', price: '649' },
-  { title: 'Немецкая', price: '699' },
-  { title: 'Пепперони', price: '639' },
-  { title: 'Ветчина и сыр', price: '499' },
-  ]
 
-  const renderItems = items.map((item, index) => <PizzaBlock
-    title={item.title}
+
+
+  const items = pizzas.map((item, index) => <PizzaBlock
+    id={item.id}
+    category={item.category}
+    imageUrl={item.imageUrl}
+    name={item.name}
     price={item.price}
-    key={index}
+    key={item.id}
   />)
+
 
 
 
@@ -46,7 +47,7 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {renderItems}
+            {items}
           </div>
         </div>
       </div>

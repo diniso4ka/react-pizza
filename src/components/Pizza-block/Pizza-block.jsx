@@ -3,12 +3,11 @@ import React from 'react'
 
 
 
-const PizzaBlock = ({ title, price }) => {
+const PizzaBlock = ({ name, price, imageUrl }) => {
 
   const [pizzaCount, setPizzaCount] = React.useState(0)
   const onClickAdd = () => {
     setPizzaCount(pizzaCount + 1)
-    console.log(pizzaCount)
   }
 
 
@@ -16,10 +15,10 @@ const PizzaBlock = ({ title, price }) => {
     <div className="pizza-block">
       <img
         className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+        src={imageUrl}
         alt="Pizza"
       />
-      <h4 className="pizza-block__title">{title}</h4>
+      <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
           <li className="active">тонкое</li>
