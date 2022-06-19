@@ -29,7 +29,9 @@ function App() {
 
       await setIsLoading(false)
     }
+    window.scrollTo(0, 0)
     fetchData()
+
   }, [])
 
 

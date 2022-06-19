@@ -2,14 +2,19 @@
 @import '../../libs/normalize';
 
 .categories {
+   width: 100%;
+   display: inline-block;
+
    ul {
       display: flex;
+
 
       li {
          background-color: #f9f9f9;
          padding: 13px 30px;
          border-radius: 30px;
          margin-right: 10px;
+         margin-bottom: 10px;
          font-weight: bold;
          cursor: pointer;
          transition: background-color 0.1s ease-in-out;
