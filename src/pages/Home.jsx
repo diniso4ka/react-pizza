@@ -7,12 +7,18 @@ import Skeleton from '../components/Pizza-block/Skeleton'
 import PizzaBlock from '../components/Pizza-block/Pizza-block'
 
 
-const Home = ({ items, isLoading }) => {
+const Home = ({ items, isLoading, activeIndex, setActiveIndex, sortType, setSortType }) => {
    return (
       <>
          <div className="content__top">
-            <Categories />
-            <Sort />
+            <Categories
+               activeIndex={activeIndex}
+               setActiveIndex={setActiveIndex}
+            />
+            <Sort
+               sortType={sortType}
+               setSortType={setSortType}
+            />
          </div>
          <h2 className="content__title">Все пиццы</h2>
          <div className="content__items">

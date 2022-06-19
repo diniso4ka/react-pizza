@@ -3,9 +3,9 @@ import React from 'react'
 
 
 
-const Categories = () => {
+const Categories = ({ activeIndex, setActiveIndex }) => {
 
-  const [activeIndex, setActiveIndex] = React.useState(0)
+
 
 
 

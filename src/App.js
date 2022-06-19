@@ -18,6 +18,8 @@ import Header from './components/Header/Header'
 function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
+  const [activeIndex, setActiveIndex] = React.useState(0)
+  const [sortType, setSortType] = React.useState(0)
 
 
 
@@ -47,6 +49,10 @@ function App() {
             <Route path='/' element={<Home
               isLoading={isLoading}
               items={items}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              sortType={sortType}
+              setSortType={setSortType}
             />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
