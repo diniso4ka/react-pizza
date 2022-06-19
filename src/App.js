@@ -1,14 +1,16 @@
 import './App.scss';
 import React from 'react';
 import axios from 'axios';
+import { Route, Routes } from 'react-router-dom';
 
 
 
+
+
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import Header from './components/Header/Header'
-import Categories from './components/Categories/Categories'
-import Sort from './components/Sort/Sort'
-import PizzaBlock from './components/Pizza-block/Pizza-block'
-import Skeleton from './components/Pizza-block/Skeleton';
+
 
 
 
@@ -39,34 +41,18 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
   return (
     <div className='wrapper'>
       <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-
-            {isLoading ?
-              [... new Array(9)].map((_, index) => <Skeleton key={index} />) :
-              items.map((item, index) => <PizzaBlock
-                key={index}
-                {...item}
-              />)}
-          </div>
+          <Routes>
+            <Route path='/NotFound' element={<NotFound />} />
+            <Route path='/' element={<Home
+              isLoading={isLoading}
+              items={items}
+            />} />
+          </Routes>
         </div>
       </div>
     </div>
