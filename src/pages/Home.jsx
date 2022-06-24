@@ -7,17 +7,22 @@ import Skeleton from '../components/Pizza-block/Skeleton'
 import PizzaBlock from '../components/Pizza-block/Pizza-block'
 
 
-const Home = ({ items, isLoading, activeIndex, setActiveIndex, sortType, setSortType }) => {
+const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, categoryId }) => {
+
+
+
    return (
       <>
          <div className="content__top">
             <Categories
-               activeIndex={activeIndex}
-               setActiveIndex={setActiveIndex}
+               value={categoryId}
+               onCategoryClick={(index) => setCategoryId(index)}
+
             />
             <Sort
-               sortType={sortType}
-               setSortType={setSortType}
+               onSortClick={(obj) => setSortType(obj)}
+               value={sortType}
+
             />
          </div>
          <h2 className="content__title">Все пиццы</h2>
@@ -36,3 +41,5 @@ const Home = ({ items, isLoading, activeIndex, setActiveIndex, sortType, setSort
 
 
 export default Home
+
+// sortType === 0?.sort((a, b) => a.price - b.price)

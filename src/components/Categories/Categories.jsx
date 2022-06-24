@@ -3,7 +3,7 @@ import React from 'react'
 
 
 
-const Categories = ({ activeIndex, setActiveIndex }) => {
+const Categories = ({ value, onCategoryClick }) => {
 
 
 
@@ -21,9 +21,11 @@ const Categories = ({ activeIndex, setActiveIndex }) => {
 
   const categoriesElements = categories
     .map((element, index) =>
-      <li onClick={() => setActiveIndex(index)} className={activeIndex === index ? 'active' : ''} key={element}>
+      <li onClick={() => onCategoryClick(index)}
+        className={value === index ? 'active' : ''}
+        key={index}>
         {element}
-      </ li>)
+      </li>)
 
   return (
     <div className="categories">

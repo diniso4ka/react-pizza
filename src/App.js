@@ -18,23 +18,30 @@ import Header from './components/Header/Header'
 function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [activeIndex, setActiveIndex] = React.useState(0)
-  const [sortType, setSortType] = React.useState(0)
+  const [categoryId, setCategoryId] = React.useState(0)
+  const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' })
 
 
 
 
   React.useEffect(() => {
+
+    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
+    const sortBy = sortType.sortProperty.replace('-', '')
+    const category = categoryId > 0 ? `category=${categoryId}` : ''
+
     async function fetchData() {
-      const itemsResponse = await axios.get('https://62ab2c0fa62365888bd68a9b.mockapi.io/items')
+      setIsLoading(true)
+      const itemsResponse = await axios.get(`https://62ab2c0fa62365888bd68a9b.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
       setItems(itemsResponse.data)
+
 
       await setIsLoading(false)
     }
     window.scrollTo(0, 0)
     fetchData()
 
-  }, [])
+  }, [categoryId, sortType])
 
 
 
@@ -49,8 +56,8 @@ function App() {
             <Route path='/' element={<Home
               isLoading={isLoading}
               items={items}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
+              categoryId={categoryId}
+              setCategoryId={setCategoryId}
               sortType={sortType}
               setSortType={setSortType}
             />} />

@@ -2,15 +2,21 @@ import './Sort.scss'
 import React from 'react'
 
 
-const Sort = ({ sortType, setSortType }) => {
+const Sort = ({ value, onSortClick }) => {
 
 
   const [open, setOpen] = React.useState(false)
-  const list = ['популярности', 'цене', 'алфавиту']
-  const sortName = list[sortType]
+  const list = [{ name: 'популярности', sortProperty: 'rating' },
+  { name: '-популярности', sortProperty: '-rating' },
+  { name: 'цене', sortProperty: 'price' },
+  { name: '-цене', sortProperty: '-price' },
+  { name: 'алфавиту', sortProperty: 'name' },
+  { name: '-алфавиту', sortProperty: '-name' }]
 
-  const onClickItem = (i) => {
-    setSortType(i)
+
+
+  const onClickItem = (obj) => {
+    onSortClick(obj)
     setOpen(false)
   }
 
@@ -31,11 +37,17 @@ const Sort = ({ sortType, setSortType }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sortName}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open ? <div className="sort__popup">
         <ul>
-          {list.map((el, index) => <li onClick={() => onClickItem(index)} key={index}>{el}</li>)}
+          {list.map((obj, index) =>
+            <li
+              onClick={() => onClickItem(obj)}
+              key={index}
+              className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+              {obj.name}
+            </li>)}
         </ul>
       </div> : ''}
     </div>
