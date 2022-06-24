@@ -20,6 +20,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true)
   const [categoryId, setCategoryId] = React.useState(0)
   const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' })
+  const [searchValue, setSearchValue] = React.useState('')
 
 
 
@@ -49,7 +50,9 @@ function App() {
 
   return (
     <div className='wrapper'>
-      <Header />
+      <Header
+        setSearchValue={setSearchValue}
+        searchValue={searchValue} />
       <div className="content">
         <div className="container">
           <Routes>
@@ -60,6 +63,9 @@ function App() {
               setCategoryId={setCategoryId}
               sortType={sortType}
               setSortType={setSortType}
+              setSearchValue={setSearchValue}
+              searchValue={searchValue}
+
             />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />

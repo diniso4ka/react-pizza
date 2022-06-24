@@ -7,8 +7,9 @@ import Skeleton from '../components/Pizza-block/Skeleton'
 import PizzaBlock from '../components/Pizza-block/Pizza-block'
 
 
-const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, categoryId }) => {
+const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, categoryId, searchValue }) => {
 
+   const filtredItems = items.filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
 
 
    return (
@@ -25,12 +26,12 @@ const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, category
 
             />
          </div>
-         <h2 className="content__title">Все пиццы</h2>
+         <h2 className="content__title">{searchValue ? `Поиск: ${searchValue}` : 'Все пиццы'}</h2>
          <div className="content__items">
 
             {isLoading ?
                [... new Array(9)].map((_, index) => <Skeleton key={index} />) :
-               items.map((item, index) => <PizzaBlock
+               filtredItems.map((item, index) => < PizzaBlock
                   key={index}
                   {...item}
                />)}

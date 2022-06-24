@@ -1,9 +1,10 @@
 import './Header.scss'
 import { Link } from 'react-router-dom';
+import Search from '../Search/Search';
 
 
 
-const Header = () => {
+const Header = ({ setSearchValue, searchValue }) => {
   return (
     <div className="header">
       <div className="container">
@@ -14,6 +15,10 @@ const Header = () => {
             <p>Самая вкусная пицца во вселенной</p>
           </div>
         </Link>
+        <Search
+          setSearchValue={setSearchValue}
+          searchValue={searchValue}
+        />
         <Link to='/cart' className="header__cart">
           <a href="/cart.html" className="button button--cart">
             <span>520 ₽</span>
