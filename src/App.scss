@@ -40,7 +40,7 @@ body {
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 12px;
 
     @media (max-width:1400px) {
@@ -124,6 +124,10 @@ body {
 }
 
 .cart {
+  @media (max-width:770px) {
+    max-width: 160px;
+  }
+
   &__top {
     display: flex;
     justify-content: space-between;

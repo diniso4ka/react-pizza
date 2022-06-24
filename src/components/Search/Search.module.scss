@@ -1,6 +1,10 @@
 .root {
    position: relative;
-   left: -120px;
+   margin-right: 10px;
+
+   @media (max-width:770px) {
+      margin-top: 15px;
+   }
 }
 
 .input {

@@ -46,9 +46,6 @@ function App() {
   }, [categoryId, sortType, currentPage])
 
 
-
-
-
   return (
     <div className='wrapper'>
       <Header
