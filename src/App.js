@@ -19,6 +19,7 @@ function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [categoryId, setCategoryId] = React.useState(0)
+  const [currentPage, setCurrentPage] = React.useState(1)
   const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' })
   const [searchValue, setSearchValue] = React.useState('')
 
@@ -33,7 +34,7 @@ function App() {
 
     async function fetchData() {
       setIsLoading(true)
-      const itemsResponse = await axios.get(`https://62ab2c0fa62365888bd68a9b.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
+      const itemsResponse = await axios.get(`https://62ab2c0fa62365888bd68a9b.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`)
       setItems(itemsResponse.data)
 
 
@@ -42,7 +43,7 @@ function App() {
     window.scrollTo(0, 0)
     fetchData()
 
-  }, [categoryId, sortType])
+  }, [categoryId, sortType, currentPage])
 
 
 
@@ -65,6 +66,8 @@ function App() {
               setSortType={setSortType}
               setSearchValue={setSearchValue}
               searchValue={searchValue}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
 
             />} />
             <Route path='/cart' element={<Cart />} />

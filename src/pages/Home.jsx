@@ -1,13 +1,15 @@
 import React from 'react'
+import ReactPaginate from 'react-paginate'
 
 
 import Categories from '../components/Categories/Categories'
 import Sort from '../components/Sort/Sort'
 import Skeleton from '../components/Pizza-block/Skeleton'
 import PizzaBlock from '../components/Pizza-block/Pizza-block'
+import Pagination from '../components/Pagination/Pagination'
 
 
-const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, categoryId, searchValue }) => {
+const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, categoryId, searchValue, setCurrentPage }) => {
 
    const filtredItems = items.filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
 
@@ -36,6 +38,9 @@ const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, category
                   {...item}
                />)}
          </div>
+         <Pagination
+
+            onChangePage={(number => setCurrentPage(number))} />
       </>
    )
 }
@@ -43,4 +48,3 @@ const Home = ({ items, isLoading, sortType, setSortType, setCategoryId, category
 
 export default Home
 
-// sortType === 0?.sort((a, b) => a.price - b.price)
