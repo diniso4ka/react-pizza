@@ -1,7 +1,9 @@
 import './App.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
+
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 
 
@@ -18,18 +20,23 @@ import Header from './components/Header/Header'
 function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [categoryId, setCategoryId] = React.useState(0)
   const [currentPage, setCurrentPage] = React.useState(1)
-  const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' })
   const [searchValue, setSearchValue] = React.useState('')
+  const categoryId = useSelector((state) => state.filter.categoryId)
+  const sortItem = useSelector((state) => state.filter.sort)
+
+
+
+
+
 
 
 
 
   React.useEffect(() => {
 
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
-    const sortBy = sortType.sortProperty.replace('-', '')
+    const order = sortItem.sortProperty.includes('-') ? 'asc' : 'desc'
+    const sortBy = sortItem.sortProperty.replace('-', '')
     const category = categoryId > 0 ? `category=${categoryId}` : ''
 
     async function fetchData() {
@@ -43,7 +50,7 @@ function App() {
     window.scrollTo(0, 0)
     fetchData()
 
-  }, [categoryId, sortType, currentPage])
+  }, [categoryId, sortItem, currentPage])
 
 
   return (
@@ -57,10 +64,6 @@ function App() {
             <Route path='/' element={<Home
               isLoading={isLoading}
               items={items}
-              categoryId={categoryId}
-              setCategoryId={setCategoryId}
-              sortType={sortType}
-              setSortType={setSortType}
               setSearchValue={setSearchValue}
               searchValue={searchValue}
               currentPage={currentPage}

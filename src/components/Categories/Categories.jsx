@@ -2,13 +2,12 @@ import './Categories.scss'
 import React from 'react'
 
 
-
-const Categories = ({ value, onCategoryClick }) => {
-
-
+import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { setCategoryId } from '../../redux/slices/filterSlice'
 
 
 
+const Categories = () => {
 
   const categories = [
     'Все',
@@ -19,10 +18,20 @@ const Categories = ({ value, onCategoryClick }) => {
     'Закрытые'
   ]
 
+  const dispatch = useDispatch()
+  const categoryId = useSelector((state) => state.filter.categoryId)
+  console.log(categoryId)
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id))
+  }
+
+
+
   const categoriesElements = categories
     .map((element, index) =>
-      <li onClick={() => onCategoryClick(index)}
-        className={value === index ? 'active' : ''}
+      <li onClick={() => onChangeCategory(index)}
+        className={categoryId === index ? 'active' : ''}
         key={index}>
         {element}
       </li>)
