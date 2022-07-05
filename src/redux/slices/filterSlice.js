@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getDefaultNormalizer } from '@testing-library/react'
+
 
 const initialState = {
    categoryId: 0,

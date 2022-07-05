@@ -20,7 +20,7 @@ const Categories = () => {
 
   const dispatch = useDispatch()
   const categoryId = useSelector((state) => state.filter.categoryId)
-  console.log(categoryId)
+
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id))
