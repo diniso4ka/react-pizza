@@ -3,10 +3,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 
-import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-
-
+import { useSelector, useDispatch } from 'react-redux/es/hooks/useSelector';
 
 
 import Home from './pages/Home';
@@ -20,10 +18,10 @@ import Header from './components/Header/Header'
 function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [currentPage, setCurrentPage] = React.useState(1)
   const [searchValue, setSearchValue] = React.useState('')
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)
+  const currentPage = useSelector((state) => state.filter.pageCount)
 
 
 
@@ -67,8 +65,6 @@ function App() {
               setSearchValue={setSearchValue}
               searchValue={searchValue}
               currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-
             />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />

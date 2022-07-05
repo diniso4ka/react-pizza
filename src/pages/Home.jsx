@@ -2,7 +2,8 @@ import React from 'react'
 import ReactPaginate from 'react-paginate'
 
 
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setPageCount } from '../redux/slices/filterSlice';
 
 
 import Categories from '../components/Categories/Categories'
@@ -12,12 +13,15 @@ import PizzaBlock from '../components/Pizza-block/Pizza-block'
 import Pagination from '../components/Pagination/Pagination'
 
 
-const Home = ({ items, isLoading, sortType, setSortType, searchValue, setCurrentPage }) => {
+const Home = ({ items, isLoading, sortType, setSortType, searchValue, currentPage }) => {
 
 
 
 
-
+   const dispatch = useDispatch()
+   const onChangeCountPage = (num) => {
+      dispatch(setPageCount(num))
+   }
    const filtredItems = items.filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
 
    return (
@@ -41,8 +45,8 @@ const Home = ({ items, isLoading, sortType, setSortType, searchValue, setCurrent
                />)}
          </div>
          <Pagination
-
-            onChangePage={(number => setCurrentPage(number))} />
+            currentPage={currentPage}
+            onChangePage={(number => onChangeCountPage(number))} />
       </>
    )
 }
