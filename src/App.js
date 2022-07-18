@@ -1,16 +1,18 @@
 import './App.scss';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
+import qs from 'qs'
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
-
-import { useSelector, useDispatch } from 'react-redux/es/hooks/useSelector';
+import { setPageCount, setFilters } from './redux/slices/filterSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import Header from './components/Header/Header'
+import { sortList } from './components/Sort/Sort';
 
 
 
@@ -22,17 +24,12 @@ function App() {
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)
   const currentPage = useSelector((state) => state.filter.pageCount)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const isSearch = React.useRef(false)
+  const isMounted = React.useRef(false)
 
-
-
-
-
-
-
-
-
-  React.useEffect(() => {
-
+  const fetchPizzas = () => {
     const order = sortItem.sortProperty.includes('-') ? 'asc' : 'desc'
     const sortBy = sortItem.sortProperty.replace('-', '')
     const category = categoryId > 0 ? `category=${categoryId}` : ''
@@ -42,12 +39,57 @@ function App() {
       const itemsResponse = await axios.get(`https://62ab2c0fa62365888bd68a9b.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`)
       setItems(itemsResponse.data)
 
-
       await setIsLoading(false)
     }
     window.scrollTo(0, 0)
     fetchData()
+  }
 
+
+
+
+
+
+
+
+  React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1))
+      const sort = sortList.find(obj => obj.sortProperty === params.sortProperty)
+      dispatch(setFilters({
+        ...params,
+        sort,
+      }))
+      console.log(sort)
+      isSearch.current = true
+    }
+
+
+  }, [])
+
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+    if (!isSearch.current) {
+      fetchPizzas()
+    }
+    isSearch.current = false
+
+
+  }, [categoryId, sortItem, currentPage])
+
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sortItem.sortProperty,
+        categoryId,
+        currentPage
+
+      })
+      navigate(`?${queryString}`)
+    }
+    isMounted.current = true
   }, [categoryId, sortItem, currentPage])
 
 
