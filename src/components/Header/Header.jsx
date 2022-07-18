@@ -29,7 +29,7 @@ const Header = ({ setSearchValue, searchValue }) => {
         />
           <Link to='/cart' className="header__cart">
             <a href="/cart.html" className="button button--cart">
-              <span>{totalPrice ? totalPrice : 0} ₽</span>
+              <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"

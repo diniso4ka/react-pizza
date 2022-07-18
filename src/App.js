@@ -111,7 +111,9 @@ function App() {
               searchValue={searchValue}
               currentPage={currentPage}
             />} />
-            <Route path='/cart' element={<Cart />} />
+            <Route path='/cart' element={<Cart
+              {...items}
+            />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </div>

@@ -9,7 +9,7 @@ import { addItem } from '../../redux/slices/cartSlice'
 
 const PizzaBlock = ({ id, name, price, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0)
-  const [activeSize, setActiveSize] = React.useState(0)
+  const [activeSize, setActiveSize] = React.useState(26)
   const dispatch = useDispatch()
   const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id))
   const addedCount = cartItem ? cartItem.count : 0
@@ -49,7 +49,7 @@ const PizzaBlock = ({ id, name, price, imageUrl, sizes, types }) => {
             {types.map((typeId) => <li key={typeId} onClick={() => setActiveType(typeId)} className={activeType === typeId || types.length === 1 ? 'active' : ''}>{pizzaTypes[typeId]}</li>)}
           </ul>
           <ul>
-            {sizes.map((size, index) => <li key={index} onClick={() => setActiveSize(index)} className={activeSize === index || sizes.length === 1 ? 'active' : ''} >{size} см.</li>)}
+            {sizes.map((size, index) => <li key={index} onClick={() => setActiveSize(size)} className={activeSize === size || sizes.length === 1 ? 'active' : ''} >{size} см.</li>)}
           </ul>
         </div>
         <div className="pizza-block__bottom">
