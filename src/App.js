@@ -21,11 +21,15 @@ function App() {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [searchValue, setSearchValue] = React.useState('')
+
+
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)
   const currentPage = useSelector((state) => state.filter.pageCount)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+
   const isSearch = React.useRef(false)
   const isMounted = React.useRef(false)
 
@@ -60,7 +64,6 @@ function App() {
         ...params,
         sort,
       }))
-      console.log(sort)
       isSearch.current = true
     }
 
