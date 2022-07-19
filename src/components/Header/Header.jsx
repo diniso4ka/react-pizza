@@ -10,7 +10,7 @@ import Search from '../Search/Search';
 
 
 
-const Header = ({ setSearchValue, searchValue }) => {
+const Header = ({ }) => {
   const { totalPrice, items } = useSelector(cartSelector)
   const totalCount = items.reduce((sum, obj) => sum + obj.count, 0)
 
@@ -26,8 +26,8 @@ const Header = ({ setSearchValue, searchValue }) => {
           </div>
         </Link>
         <div className="right"><Search
-          setSearchValue={setSearchValue}
-          searchValue={searchValue}
+        // setSearchValue={setSearchValue}
+        // searchValue={searchValue}
         />
           <Link to='/cart' className="header__cart">
             <a href="/cart.html" className="button button--cart">

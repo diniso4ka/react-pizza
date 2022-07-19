@@ -5,6 +5,7 @@ import { act } from 'react-dom/test-utils'
 const initialState = {
    categoryId: 0,
    pageCount: 1,
+   searchValue: '',
    sort: {
       name: 'популярности',
       sortProperty: 'rating'
@@ -30,12 +31,15 @@ const filterSlice = createSlice({
          state.currentPage = Number(action.payload.currentPage)
          state.sort = action.payload.sort
          state.categoryId = Number(action.payload.categoryId)
+      },
+      setSearchValue(state, action) {
+         state.searchValue = action.payload
       }
    }
 })
 
 
-export const { setCategoryId, setSortItem, setPageCount, setFilters } = filterSlice.actions
+export const { setCategoryId, setSortItem, setPageCount, setFilters, setSearchValue } = filterSlice.actions
 
 export default filterSlice.reducer
 

@@ -14,7 +14,7 @@ import Pagination from '../components/Pagination/Pagination'
 import ContentError from '../components/ContentError';
 
 
-const Home = ({ items, sortType, setSortType, searchValue, currentPage }) => {
+const Home = ({ items, sortType, setSortType, currentPage }) => {
 
 
 
@@ -23,6 +23,8 @@ const Home = ({ items, sortType, setSortType, searchValue, currentPage }) => {
    const onChangeCountPage = (num) => {
       dispatch(setPageCount(num))
    }
+
+   const { searchValue } = useSelector(state => state.filter)
    const filtredItems = items.filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
 
    return (
