@@ -5,12 +5,12 @@ import ContentError from '../components/ContentError';
 import CartItem from '../components/CartItem/CartItem';
 
 
-import { clearItems } from '../redux/slices/cartSlice';
+import { clearItems, cartSelector } from '../redux/slices/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Cart = () => {
 
-   const { items, totalPrice } = useSelector((state) => state.cart)
+   const { items, totalPrice } = useSelector(cartSelector)
    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
    const renderItems = items.map((item, index) => <CartItem {...item} key={item.id} />)
    const dispatch = useDispatch()

@@ -1,11 +1,12 @@
 import React from 'react'
 
 
-import { useDispatch } from 'react-redux'
-import { addItem, removeItem, minusItem } from '../../redux/slices/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem, removeItem, minusItem, cartSelector } from '../../redux/slices/cartSlice'
 
 
 const CartItem = ({ id, name, price, imageUrl, type, size, count }) => {
+
    const dispatch = useDispatch()
 
    const onClickPlus = () => {
@@ -15,13 +16,16 @@ const CartItem = ({ id, name, price, imageUrl, type, size, count }) => {
    }
    const onClickMinus = () => {
       dispatch(minusItem({
-         id
+         id,
+         price
       }))
 
    }
    const onClickRemove = () => {
       dispatch(removeItem({
-         id
+         id,
+         count,
+         price
       }))
    }
 
@@ -72,7 +76,7 @@ const CartItem = ({ id, name, price, imageUrl, type, size, count }) => {
             </div>
          </div>
          <div className="cart__item-price">
-            <b>{price} ₽</b>
+            <b>{count * price} ₽</b>
          </div>
          <div onClick={onClickRemove} className="cart__item-remove">
             <div className="button button--outline button--circle">
