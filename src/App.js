@@ -4,7 +4,9 @@ import axios from 'axios';
 import qs from 'qs'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { setPageCount, setFilters } from './redux/slices/filterSlice';
+
+import { setItems, fetchPizzas } from './redux/slices/pizzaSlice';
+import { setFilters } from './redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -18,14 +20,13 @@ import { sortList } from './components/Sort/Sort';
 
 
 function App() {
-  const [items, setItems] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(true)
   const [searchValue, setSearchValue] = React.useState('')
 
 
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)
   const currentPage = useSelector((state) => state.filter.pageCount)
+  const { items } = useSelector((state) => state.pizza)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -33,20 +34,17 @@ function App() {
   const isSearch = React.useRef(false)
   const isMounted = React.useRef(false)
 
-  const fetchPizzas = () => {
+  const getPizzas = () => {
     const order = sortItem.sortProperty.includes('-') ? 'asc' : 'desc'
     const sortBy = sortItem.sortProperty.replace('-', '')
     const category = categoryId > 0 ? `category=${categoryId}` : ''
 
-    async function fetchData() {
-      setIsLoading(true)
-      const itemsResponse = await axios.get(`https://62ab2c0fa62365888bd68a9b.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}`)
-      setItems(itemsResponse.data)
-
-      await setIsLoading(false)
-    }
-    window.scrollTo(0, 0)
-    fetchData()
+    dispatch(fetchPizzas({
+      order,
+      sortBy,
+      category,
+      currentPage
+    }))
   }
 
 
@@ -74,7 +72,7 @@ function App() {
   React.useEffect(() => {
     window.scrollTo(0, 0)
     if (!isSearch.current) {
-      fetchPizzas()
+      getPizzas()
     }
     isSearch.current = false
 
@@ -105,7 +103,6 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={<Home
-              isLoading={isLoading}
               items={items}
               setSearchValue={setSearchValue}
               searchValue={searchValue}

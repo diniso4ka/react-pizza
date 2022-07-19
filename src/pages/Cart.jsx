@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import CartEmpty from '../components/CartEmpty';
+import ContentError from '../components/ContentError';
 import CartItem from '../components/CartItem/CartItem';
 
 
 import { clearItems } from '../redux/slices/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Cart = ({ id, name, price, imageUrl, }) => {
+const Cart = () => {
 
    const { items, totalPrice } = useSelector((state) => state.cart)
    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
@@ -19,7 +19,12 @@ const Cart = ({ id, name, price, imageUrl, }) => {
    }
 
    if (!totalPrice) {
-      return <CartEmpty />
+      return <ContentError
+         title={'Корзина пустая'}
+         firstString={'Вероятней всего, вы не заказывали ещё пиццу.'}
+         secondString={'Для того, чтобы заказать пиццу, перейди на главную страницу.'}
+         imageUrl={'https://github.com/Archakov06/react-pizza-v2/blob/master/src/assets/img/empty-cart.png?raw=true'}
+      />
    }
 
    return (
