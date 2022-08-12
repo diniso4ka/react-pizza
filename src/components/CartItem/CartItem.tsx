@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addItem, removeItem, minusItem, cartSelector } from '../../redux/slices/cartSlice'
 
 
+import { useAppDispatch } from '../../redux/store'
+
+
 type CartItemProps = {
    id: string,
    name: string,

@@ -5,9 +5,10 @@ import qs from 'qs'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
-import { setItems, fetchPizzas } from './redux/slices/pizzaSlice';
-import { setFilters } from './redux/slices/filterSlice';
+import { setItems, fetchPizzas, SearchPizzaParams } from './redux/slices/pizzaSlice';
+import { FilterSliceState, setFilters } from './redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch } from './redux/store'
 
 
 import Home from './pages/Home';
@@ -21,20 +22,20 @@ import { sortList } from './components/Sort/Sort';
 
 const App = () => {
 
-  const categoryId = useSelector((state) => state.filter.categoryId)
-  const sortItem = useSelector((state) => state.filter.sort)
-  const currentPage = useSelector((state) => state.filter.pageCount)
-  const { items } = useSelector((state) => state.pizza)
+  const categoryId = useSelector((state: any) => state.filter.categoryId)
+  const sortItem = useSelector((state: any) => state.filter.sort)
+  const currentPage = useSelector((state: any) => state.filter.pageCount)
+  const { items } = useSelector((state: any) => state.pizza)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
 
   const isSearch = React.useRef(false)
   const isMounted = React.useRef(false)
 
   const getPizzas = () => {
-    const order = sortItem.sortProperty.includes('-') ? 'asc' : 'desc'
-    const sortBy = sortItem.sortProperty.replace('-', '')
+    const order = sortItem.sortBy.includes('-') ? 'ASC' : 'DESC'
+    const sortBy = sortItem.sortBy.replace('-', '')
     const category = categoryId > 0 ? `category=${categoryId}` : ''
 
     dispatch(fetchPizzas({
@@ -54,8 +55,8 @@ const App = () => {
 
   React.useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1))
-      const sort = sortList.find(obj => obj.sortProperty === params.sortProperty)
+      const params = (qs.parse(window.location.search.substring(1)) as unknown) as SearchPizzaParams
+      const sort = sortList.find(obj => obj.sortProperty === params.sortBy)
       dispatch(setFilters({
         ...params,
         sort,

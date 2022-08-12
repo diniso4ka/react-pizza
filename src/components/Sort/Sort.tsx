@@ -2,24 +2,25 @@ import './Sort.scss'
 import React from 'react'
 
 
-import { setSortItem } from '../../redux/slices/filterSlice'
+import { setSortItem, SortPropertyEnum } from '../../redux/slices/filterSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { SortType } from '../../redux/slices/filterSlice'
 
 
 type SortItem = {
   name: string,
-  sortProperty: string,
+  sortBy: SortPropertyEnum,
 }
 
 
 
 
-export const sortList: SortItem[] = [{ name: 'популярности', sortProperty: 'rating' },
-{ name: '-популярности', sortProperty: '-rating' },
-{ name: 'цене', sortProperty: 'price' },
-{ name: '-цене', sortProperty: '-price' },
-{ name: 'алфавиту', sortProperty: 'name' },
-{ name: '-алфавиту', sortProperty: '-name' }]
+export const sortList: SortItem[] = [{ name: 'популярности', sortBy: SortPropertyEnum.RATING_DESC },
+{ name: '-популярности', sortBy: SortPropertyEnum.RATING_ASC },
+{ name: 'цене', sortBy: SortPropertyEnum.PRICE_DESC },
+{ name: '-цене', sortBy: SortPropertyEnum.PRICE_ASC },
+{ name: 'алфавиту', sortBy: SortPropertyEnum.TITLE_DESC },
+{ name: '-алфавиту', sortBy: SortPropertyEnum.TITLE_ASC }]
 
 
 const Sort = () => {
@@ -82,7 +83,7 @@ const Sort = () => {
             <li
               onClick={() => onClickItem(obj)}
               key={index}
-              className={sortItem.sortProperty === obj.sortProperty ? 'active' : ''}
+              className={sortItem.sortProperty === obj.sortBy ? 'active' : ''}
             >
               {obj.name}
             </li>)}
