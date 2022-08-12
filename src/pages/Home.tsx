@@ -14,7 +14,7 @@ import Pagination from '../components/Pagination/Pagination'
 import ContentError from '../components/ContentError';
 
 
-const Home = ({ items, sortType, setSortType, currentPage }) => {
+const Home: React.FC = ({ items, sortType, setSortType, currentPage }) => {
 
 
 
@@ -38,7 +38,7 @@ const Home = ({ items, sortType, setSortType, currentPage }) => {
             />
          </div>
          <h2 className="content__title">{searchValue ? `Поиск: ${searchValue}` : 'Все пиццы'}</h2>
-         {status === 'error' ? <ContentError className='content__error-info'
+         {status === 'error' ? <ContentError className="content__error-info"
             title={'Произошла ошибка'}
             firstString={'К сожалению, не удалось получить питсы.'}
             secondString={'Попробуйте повторить попытку позже.'}

@@ -1,7 +1,7 @@
 import './Header.scss'
 
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../../redux/slices/cartSlice';
 
@@ -12,7 +12,8 @@ import Search from '../Search/Search';
 
 const Header = ({ }) => {
   const { totalPrice, items } = useSelector(cartSelector)
-  const totalCount = items.reduce((sum, obj) => sum + obj.count, 0)
+  const totalCount = items.reduce((sum: number, obj: any) => sum + obj.count, 0)
+  const location = useLocation()
 
 
   return (
@@ -25,10 +26,8 @@ const Header = ({ }) => {
             <p>Самая вкусная пицца во вселенной</p>
           </div>
         </Link>
-        <div className="right"><Search
-        // setSearchValue={setSearchValue}
-        // searchValue={searchValue}
-        />
+        <div className="right">{location === '/cart' && <Search
+        />}
           <Link to='/cart' className="header__cart">
             <a href="/cart.html" className="button button--cart">
               <span>{totalPrice} ₽</span>

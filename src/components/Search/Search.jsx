@@ -27,7 +27,7 @@ const Search = ({ }) => {
       debounce((str) => {
          console.log(str)
          dispatch(setSearchValue(str))
-         console.log(searchValue)
+
       }, 600),
       []
    )

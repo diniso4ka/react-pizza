@@ -20,8 +20,6 @@ import { sortList } from './components/Sort/Sort';
 
 
 function App() {
-  // const [searchValue, setSearchValue] = React.useState('')
-
 
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)
@@ -97,16 +95,14 @@ function App() {
   return (
     <div className='wrapper'>
       <Header
-      // setSearchValue={setSearchValue}
-      // searchValue={searchValue} 
+
       />
       <div className="content">
         <div className="container">
           <Routes>
             <Route path='/' element={<Home
               items={items}
-              // setSearchValue={setSearchValue}
-              // searchValue={searchValue}
+
               currentPage={currentPage}
             />} />
             <Route path='/cart' element={<Cart
