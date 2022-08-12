@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import debounce from 'lodash.debounce'
 
 
-const Search = ({ }) => {
+const Search = () => {
    const { searchValue } = useSelector((state: any) => state.filter)
    const dispatch = useDispatch()
    const [value, setValue] = React.useState('')
@@ -35,7 +35,7 @@ const Search = ({ }) => {
 
 
 
-   const onChangeInput = (event: any) => {
+   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value)
       updateSearchValue(event.target.value)
    }
