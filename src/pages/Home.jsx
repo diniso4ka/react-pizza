@@ -14,7 +14,7 @@ import Pagination from '../components/Pagination/Pagination'
 import ContentError from '../components/ContentError';
 
 
-const Home: React.FC = ({ items, sortType, setSortType, currentPage }) => {
+const Home = ({ items, sortType, setSortType, currentPage }) => {
 
 
 

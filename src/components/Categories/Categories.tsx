@@ -7,7 +7,7 @@ import { setCategoryId } from '../../redux/slices/filterSlice'
 
 
 
-const Categories = () => {
+const Categories: React.FC = () => {
 
   const categories = [
     'Все',
@@ -19,7 +19,7 @@ const Categories = () => {
   ]
 
   const dispatch = useDispatch()
-  const categoryId = useSelector((state) => state.filter.categoryId)
+  const categoryId = useSelector((state: any) => state.filter.categoryId)
 
 
   const onChangeCategory = (id) => {

@@ -10,10 +10,10 @@ import Search from '../Search/Search';
 
 
 
-const Header = ({ }) => {
+const Header: React.FC = () => {
   const { totalPrice, items } = useSelector(cartSelector)
   const totalCount = items.reduce((sum: number, obj: any) => sum + obj.count, 0)
-  const location = useLocation()
+  const location: any = useLocation()
 
 
   return (

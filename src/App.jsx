@@ -19,7 +19,7 @@ import { sortList } from './components/Sort/Sort';
 
 
 
-function App() {
+const App = () => {
 
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortItem = useSelector((state) => state.filter.sort)

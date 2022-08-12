@@ -5,8 +5,16 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-const ContentError = ({ title, firstString, secondString, imageUrl }) => {
-   const { status } = useSelector((state) => state.pizza)
+type ContentError = {
+   title: string,
+   firstString: string,
+   secondString: string,
+   imageUrl: string
+}
+
+
+const ContentError: React.FC<ContentError> = ({ title, firstString, secondString, imageUrl }) => {
+   const { status } = useSelector((state: any) => state.pizza)
 
 
    return (<div className="content__error-info">
