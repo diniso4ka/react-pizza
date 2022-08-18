@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import filter from './slices/filter/filterSlice'
 import cart from './slices/cartSlice'
-import pizza from './slices/pizzaSlice'
+import pizza from './slices/pizza/pizzaSlice'
 
 
 export const store = configureStore({

@@ -12,19 +12,28 @@ import Skeleton from '../components/Pizza-block/Skeleton'
 import PizzaBlock from '../components/Pizza-block/Pizza-block'
 import Pagination from '../components/Pagination/Pagination'
 import ContentError from '../components/ContentError';
+import { CartItem } from '../redux/slices/cartSlice';
 
 
-const Home = ({ items, sortType, setSortType, currentPage }) => {
+type HomeProps = {
+   sortType: string;
+   items: CartItem[];
+   currentPage: number;
+
+}
+
+
+const Home: React.FC<HomeProps> = ({ items, currentPage }) => {
 
 
 
-   const { status } = useSelector(state => state.pizza)
+   const { status } = useSelector((state: any) => state.pizza)
    const dispatch = useDispatch()
    const onChangeCountPage = (num) => {
       dispatch(setPageCount(num))
    }
 
-   const { searchValue } = useSelector(state => state.filter)
+   const { searchValue } = useSelector((state: any) => state.filter)
    const filtredItems = items.filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
 
    return (
@@ -32,13 +41,10 @@ const Home = ({ items, sortType, setSortType, currentPage }) => {
          <div className="content__top">
             <Categories />
             <Sort
-               onSortClick={(obj) => setSortType(obj)}
-               value={sortType}
-
             />
          </div>
          <h2 className="content__title">{searchValue ? `Поиск: ${searchValue}` : 'Все пиццы'}</h2>
-         {status === 'error' ? <ContentError className="content__error-info"
+         {status === 'error' ? <ContentError
             title={'Произошла ошибка'}
             firstString={'К сожалению, не удалось получить питсы.'}
             secondString={'Попробуйте повторить попытку позже.'}
@@ -48,8 +54,10 @@ const Home = ({ items, sortType, setSortType, currentPage }) => {
 
                {status === 'loading' ?
                   [... new Array(9)].map((_, index) => <Skeleton key={index} />) :
-                  filtredItems.map((item, index) => < PizzaBlock
+                  filtredItems.map((item, index) => <PizzaBlock
                      key={index}
+                     sizes={item.size}
+                     types={item.type}
                      {...item}
                   />)}
             </div>}

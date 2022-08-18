@@ -4,7 +4,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import React from 'react';
 
 
-import { fetchPizzas, SearchPizzaParams } from './redux/slices/pizzaSlice';
+import { fetchPizzas } from './redux/slices/pizza/pizzaSlice';
+import { SearchPizzaParams } from './redux/slices/pizza/types'
 import { setFilters } from './redux/slices/filter/filterSlice';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from './redux/store'
@@ -109,7 +110,6 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home
               items={items}
-
               currentPage={currentPage}
             />} />
             <Route path='/cart' element={<Cart

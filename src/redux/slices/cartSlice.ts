@@ -1,6 +1,6 @@
 import { RootState } from './../store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils'
+
 
 
 
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
          state.totalPrice = state.totalPrice - action.payload.price * action.payload.count
 
       },
-      clearItems(state, action) {
+      clearItems(state, action: PayloadAction<string>) {
          state.items = []
          state.totalPrice = 0
 

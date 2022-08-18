@@ -8,11 +8,11 @@ import CartItem from '../components/CartItem/CartItem';
 import { clearItems, cartSelector } from '../redux/slices/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Cart = () => {
+const Cart: React.FC = () => {
 
    const { items, totalPrice } = useSelector(cartSelector)
    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
-   const renderItems = items.map((item, index) => <CartItem {...item} key={item.id} />)
+   const renderItems = items.map((item) => <CartItem {...item} key={item.id} />)
    const dispatch = useDispatch()
    const onClickClear = () => {
       dispatch(clearItems())
