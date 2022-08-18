@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { SortType } from './filterSlice'
+import { Sort } from './filter/types'
 import axios from 'axios'
 
 
@@ -7,9 +7,10 @@ type FetchPizzasTypes = Record<string, string>
 
 export type SearchPizzaParams = {
    order: string;
-   sortBy: SortType;
+   sortBy: Sort;
    category: string;
    currentPage: string;
+   search: string;
 }
 
 export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params: FetchPizzasTypes) => {

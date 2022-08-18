@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate'
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageCount } from '../redux/slices/filterSlice';
+import { setPageCount } from '../redux/slices/filter/filterSlice';
 
 
 import Categories from '../components/Categories/Categories'
